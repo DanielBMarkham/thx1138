@@ -1,3 +1,5 @@
 {
-  "python.linting.pylintEnabled": true
+  "python.linting.pylintEnabled": true,
+  "dotnet-test-explorer.pathForResultFile": "tmp",
+  "dotnet-test-explorer.testProjectPath": "test/*/*Tests.*"
 }
