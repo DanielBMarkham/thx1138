@@ -1,0 +1,146 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: |
+  Static web site stack including:
+  * S3 bucket for putting the json data coming from AirTable 
+
+Parameters:
+  # BlogName: tgb wtf n23 etc
+  BlogName:
+    Type: String
+    Description: "The blog name as it exists in the AirTable tables"
+    MinLength: 3
+    MaxLength: 253
+    AllowedPattern: "[a-z0-9]+[-.a-z0-9]*(\\.[a-z][a-z]+)+"
+    ConstraintDescription: "Provide a valid blog name using only lowercase letters, numbers, and dash (-) - 3 character minimum"
+    Default: "tgb"
+
+  GeneratorLambdaFunctionS3Bucket:
+    Type: String
+    Description: "S3 bucket containing ZIP of AWS Lambda function (to pull data from AirTable)"
+    Default: "markham-lambda-1"
+
+  GeneratorLambdaFunctionS3Key:
+    Type: String
+    Description: "S3 key containing ZIP of AWS Lambda function (to pull data from AirTable)"
+    Default: "airtable-lambda.zip"
+
+  GeneratorLambdaFunctionRuntime:
+    Type: String
+    Description: "Runtime language for AWS Lambda function (to pull data from AirTable)"
+    Default: "python2.7"
+    AllowedValues:
+      - "python2.7"
+      - "python3.6"
+      - "nodejs"
+      - "nodejs4.3"
+      - "java8"
+      - "netcore2.1"
+
+  GeneratorLambdaFunctionHandler:
+    Type: String
+    Description: "Function Handler for AWS Lambda function (static site generator)"
+    Default: "index.handler"
+
+
+  PreExistingLogsBucket:
+    Description: "Optional name of pre-existing access logs bucket. Leave empty to have access logs bucket created and managed by this stack."
+    Type: String
+    Default: ""
+
+Conditions:
+  NeedsNewSiteBucket: !Equals [!Ref PreExistingSiteBucket, ""]
+  NeedsNewLogsBucket: !Equals [!Ref PreExistingLogsBucket, ""]
+
+Resources:
+  # Bucket for CloudFront and S3 access logs: logs.example.com
+  LogsBucket:
+    Condition: NeedsNewLogsBucket
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: !Sub "logs.airblog.${BlogName}"
+      AccessControl: LogDeliveryWrite
+    DeletionPolicy: Retain
+
+  # Bucket for site content: airblog.tgb
+  SiteBucket:
+    Condition: NeedsNewSiteBucket
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: !Sub "airblog.${BlogName}"
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+      # logs.airblog.tgb/logs/s3/tgb/
+      LoggingConfiguration:
+        DestinationBucketName: !If [NeedsNewLogsBucket, !Ref LogsBucket, !Ref PreExistingLogsBucket]
+        LogFilePrefix: !Sub "logs/s3/${BlogName}/"
+    DeletionPolicy: Retain
+
+
+
+  # IAM info for AWS Lambda functions
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: "/"
+      Policies:
+        - PolicyName: !Sub "${BlogName}-execution-policy"
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: "logs:*"
+                Resource: "arn:aws:logs:*:*:*"
+              - Effect: Allow
+                Action:
+                  - codepipeline:PutJobSuccessResult
+                  - codepipeline:PutJobFailureResult
+                Resource: "*"
+              - Effect: Allow
+                Action:
+                  - s3:GetBucketLocation
+                  - s3:ListBucket
+                  - s3:ListBucketMultipartUploads
+                Resource:
+                  - !Join ["", ["arn:aws:s3:::", !If [NeedsNewSiteBucket, !Ref SiteBucket, !Ref PreExistingSiteBucket]]]
+              - Effect: Allow
+                Action:
+                  - s3:AbortMultipartUpload
+                  - s3:DeleteObject
+                  - s3:GetObject
+                  - s3:GetObjectAcl
+                  - s3:ListMultipartUploadParts
+                  - s3:PutObject
+                  - s3:PutObjectAcl
+                Resource:
+                  - !Join ["", ["arn:aws:s3:::", !If [NeedsNewSiteBucket, !Ref SiteBucket, !Ref PreExistingSiteBucket], "/*"]]
+              - Effect: Allow
+                Action: "cloudfront:CreateInvalidation"
+                Resource: "*"
+
+  GeneratorLambdaFunction:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Description: !Sub "Static site generator for ${BlogName}"
+      #TBD: Some static site generators might need more permissions
+      Role: !GetAtt LambdaExecutionRole.Arn
+      MemorySize: 1536
+      Timeout: 300
+      Runtime: !Ref GeneratorLambdaFunctionRuntime
+      Handler: !Ref GeneratorLambdaFunctionHandler
+      Code:
+        S3Bucket: !Ref GeneratorLambdaFunctionS3Bucket
+        S3Key: !Ref GeneratorLambdaFunctionS3Key
+
