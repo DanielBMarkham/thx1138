@@ -12,7 +12,7 @@ Parameters:
     Description: "The blog name as it exists in the AirTable tables"
     MinLength: 3
     MaxLength: 253
-    AllowedPattern: "[a-z0-9]+[-.a-z0-9]*(\\.[a-z][a-z]+)+"
+    AllowedPattern: "[a-z0-9]+[-.a-z0-9]*(\\.[a-z][a-z]+)*"
     ConstraintDescription: "Provide a valid blog name using only lowercase letters, numbers, and dash (-) - 3 character minimum"
     Default: "tgb"
 
@@ -24,7 +24,7 @@ Parameters:
   GeneratorLambdaFunctionS3Key:
     Type: String
     Description: "S3 key containing ZIP of AWS Lambda function (to pull data from AirTable)"
-    Default: "airtable-lambda.zip"
+    Default: "airtable-sync-lambda.zip"
 
   GeneratorLambdaFunctionRuntime:
     Type: String
@@ -41,8 +41,12 @@ Parameters:
   GeneratorLambdaFunctionHandler:
     Type: String
     Description: "Function Handler for AWS Lambda function (static site generator)"
-    Default: "index.handler"
+    Default: "src/python/Function.handler"
 
+  PreExistingSiteBucket:
+    Description: "Optional name of pre-existing bucket for the file to land in. Leave empty to have the bucket created and managed by this stack."
+    Type: String
+    Default: ""
 
   PreExistingLogsBucket:
     Description: "Optional name of pre-existing access logs bucket. Leave empty to have access logs bucket created and managed by this stack."
