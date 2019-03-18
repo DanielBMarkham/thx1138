@@ -22,7 +22,7 @@
       "problemMatcher": "$msCompile"
   },
   {
-    "label": "Build CloudFormation",
+    "label": "Test Locally",
     "command": "sh echo cow",
     "type": "shell",
     "options": {
@@ -36,7 +36,7 @@
 },
 {
   "label": "Build Deploy",
-  "command": "echo moo",
+  "command": "sh deploy.sh",
   "type": "shell",
   "options": {
       "cwd": "./"

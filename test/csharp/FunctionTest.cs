@@ -20,7 +20,7 @@ namespace AWSLambda2.Tests
 {
     public class FunctionTest
     {
-        [Fact]
+        [Fact(DisplayName="DisplayName should be displayed")]
         public async Task TestS3EventLambdaFunction()
         {
             IAmazonS3 s3Client = new AmazonS3Client(RegionEndpoint.USWest2);

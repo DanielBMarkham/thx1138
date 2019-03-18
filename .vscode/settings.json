@@ -1,5 +1,5 @@
 {
   "python.linting.pylintEnabled": true,
   "dotnet-test-explorer.pathForResultFile": "tmp",
-  "dotnet-test-explorer.testProjectPath": "test/*/*Tests.*"
+  "dotnet-test-explorer.testProjectPath": "test/csharp/Function.Tests*"
 }

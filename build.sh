@@ -26,4 +26,3 @@ dotnet build
 cd ../..
 zip deploy/airtable-sync-lambda.zip src/fsharp/obj/Debug/netcoreapp2.1/*.* src/csharp/obj/Debug/netcoreapp2.1/*.* src/python37/*.*
 
-\

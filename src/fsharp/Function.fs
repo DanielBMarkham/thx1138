@@ -37,6 +37,6 @@ type Function(s3Client: IAmazonS3) =
 
             return response.Headers.ContentType
         }
-
+ 
         fetchContentType (event.Records.Item(0).S3)
         |> Async.RunSynchronously
