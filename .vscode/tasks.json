@@ -13,39 +13,52 @@
       "command": "sh build.sh",
       "type": "shell",
       "options": {
-          "cwd": "./"
+        "cwd": "./"
       },
       "group": "build",
       "presentation": {
-          "reveal": "always"
+        "reveal": "always"
       },
       "problemMatcher": "$msCompile"
-  },
-  {
-    "label": "Test Locally",
-    "command": "sh echo cow",
-    "type": "shell",
-    "options": {
+    },
+    {
+      "label": "Test Locally",
+      "command": "sh echo cow",
+      "type": "shell",
+      "options": {
         "cwd": "./"
-    },
-    "group": "build",
-    "presentation": {
+      },
+      "group": "build",
+      "presentation": {
         "reveal": "silent"
+      },
+      "problemMatcher": "$msCompile"
     },
-    "problemMatcher": "$msCompile"
-},
-{
-  "label": "Build Deploy",
-  "command": "sh deploy.sh",
-  "type": "shell",
-  "options": {
-      "cwd": "./"
-  },
-  "group": "build",
-  "presentation": {
-      "reveal": "silent"
-  },
-  "problemMatcher": "$msCompile"
-}
-]
+    {
+      "label": "Deploy Code",
+      "command": "sh deploy.sh",
+      "type": "shell",
+      "options": {
+        "cwd": "./"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Deploy Cloud",
+      "command": "sh deploy.sh",
+      "type": "shell",
+      "options": {
+        "cwd": "./"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": "$msCompile"
+    }
+  ]
 }

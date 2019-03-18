@@ -148,3 +148,33 @@ Resources:
         S3Bucket: !Ref GeneratorLambdaFunctionS3Bucket
         S3Key: !Ref GeneratorLambdaFunctionS3Key
 
+Outputs:
+  DomainName:
+    Description: Blog name
+    Value: !Ref BlogName
+  SiteBucket:
+    Value: !If [NeedsNewSiteBucket, !Ref SiteBucket, !Ref PreExistingSiteBucket]
+  LogsBucket:
+    Description: S3 Bucket with access logs
+    Value: !If [NeedsNewLogsBucket, !Ref LogsBucket, !Ref PreExistingLogsBucket]
+
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: Name for blog
+        Parameters:
+          - BlogName
+      - Label:
+          default: AWS Lambda Function (AirTable sync)
+        Parameters:
+          - GeneratorLambdaFunctionS3Bucket
+          - GeneratorLambdaFunctionS3Key
+          - GeneratorLambdaFunctionRuntime
+          - GeneratorLambdaFunctionHandler
+          - GeneratorLambdaFunctionUserParameters
+      - Label:
+          default: PreExisting Resources To Use (Leave empty for stack to create and manage)
+        Parameters:
+          - PreExistingSiteBucket
+          - PreExistingLogsBucket
