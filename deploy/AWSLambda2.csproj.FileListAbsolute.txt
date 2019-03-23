@@ -1,0 +1,10 @@
+d:\Documents\Visual Studio 2017\Projects\AWSLambda2\AWSLambda2\bin\Debug\netcoreapp2.1\AWSLambda2.deps.json
+d:\Documents\Visual Studio 2017\Projects\AWSLambda2\AWSLambda2\bin\Debug\netcoreapp2.1\AWSLambda2.runtimeconfig.json
+d:\Documents\Visual Studio 2017\Projects\AWSLambda2\AWSLambda2\bin\Debug\netcoreapp2.1\AWSLambda2.runtimeconfig.dev.json
+d:\Documents\Visual Studio 2017\Projects\AWSLambda2\AWSLambda2\bin\Debug\netcoreapp2.1\AWSLambda2.dll
+d:\Documents\Visual Studio 2017\Projects\AWSLambda2\AWSLambda2\bin\Debug\netcoreapp2.1\AWSLambda2.pdb
+d:\Documents\Visual Studio 2017\Projects\AWSLambda2\AWSLambda2\obj\Debug\netcoreapp2.1\AWSLambda2.csproj.CoreCompileInputs.cache
+d:\Documents\Visual Studio 2017\Projects\AWSLambda2\AWSLambda2\obj\Debug\netcoreapp2.1\AWSLambda2.AssemblyInfoInputs.cache
+d:\Documents\Visual Studio 2017\Projects\AWSLambda2\AWSLambda2\obj\Debug\netcoreapp2.1\AWSLambda2.AssemblyInfo.cs
+d:\Documents\Visual Studio 2017\Projects\AWSLambda2\AWSLambda2\obj\Debug\netcoreapp2.1\AWSLambda2.dll
+d:\Documents\Visual Studio 2017\Projects\AWSLambda2\AWSLambda2\obj\Debug\netcoreapp2.1\AWSLambda2.pdb

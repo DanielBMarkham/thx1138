@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "d:\\Dropbox\\aa-source\\thx1138\\thx1138\\src\\csharp\\Function.csproj",
+  "TargetFramework": "netcoreapp2.1",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}

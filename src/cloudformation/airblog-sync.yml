@@ -6,10 +6,10 @@ Description: |
   * S3 bucket for putting the json data coming from AirTable 
 
 Parameters:
-  # BlogName: tgb wtf n23 etc
+# BlogName: tgb wtf n23 etc
   BlogName:
     Type: String
-    Description: "The blog name as it exists in the AirTable tables"
+    Description: "The blog abbreviation as it exists in the AirTable tables"
     MinLength: 3
     MaxLength: 253
     AllowedPattern: "[a-z0-9]+[-.a-z0-9]*(\\.[a-z][a-z]+)*"
@@ -29,9 +29,9 @@ Parameters:
   GeneratorLambdaFunctionRuntime:
     Type: String
     Description: "Runtime language for AWS Lambda function (to pull data from AirTable)"
-    Default: "python2.7"
+    Default: "python3.7"
     AllowedValues:
-      - "python2.7"
+      - "python3.7"
       - "python3.6"
       - "nodejs"
       - "nodejs4.3"
@@ -41,7 +41,7 @@ Parameters:
   GeneratorLambdaFunctionHandler:
     Type: String
     Description: "Function Handler for AWS Lambda function (static site generator)"
-    Default: "src/python/Function.handler"
+    Default: "Function.lambda_handler"
 
   PreExistingSiteBucket:
     Description: "Optional name of pre-existing bucket for the file to land in. Leave empty to have the bucket created and managed by this stack."
@@ -109,18 +109,19 @@ Resources:
                 Resource: "arn:aws:logs:*:*:*"
               - Effect: Allow
                 Action:
-                  - codepipeline:PutJobSuccessResult
-                  - codepipeline:PutJobFailureResult
-                Resource: "*"
+                  - s3:GetBucketLocation
+                  - s3:ListBucket
+                  - s3:ListBucketMultipartUploads
+                  - s3:PutObject
+                  - s3:PutObjectAcl
+                Resource:
+                  - !Join ["", ["arn:aws:s3:::", !If [NeedsNewLogsBucket, !Ref LogsBucket, !Ref PreExistingLogsBucket]]]
               - Effect: Allow
                 Action:
                   - s3:GetBucketLocation
                   - s3:ListBucket
-                  - s3:ListBucketMultipartUploads
-                Resource:
-                  - !Join ["", ["arn:aws:s3:::", !If [NeedsNewSiteBucket, !Ref SiteBucket, !Ref PreExistingSiteBucket]]]
-              - Effect: Allow
-                Action:
+                  - s3:GetBucketVersioning
+                  - s3:GetObjectVersion
                   - s3:AbortMultipartUpload
                   - s3:DeleteObject
                   - s3:GetObject
@@ -131,22 +132,62 @@ Resources:
                 Resource:
                   - !Join ["", ["arn:aws:s3:::", !If [NeedsNewSiteBucket, !Ref SiteBucket, !Ref PreExistingSiteBucket], "/*"]]
               - Effect: Allow
-                Action: "cloudfront:CreateInvalidation"
-                Resource: "*"
+                Action:
+                  - ssm:GetParameter
+                Resource:
+                  - "arn:aws:ssm:us-east-1:986446447837:parameter/dev/airtable-token"
+                  - "arn:aws:ssm:us-east-1:986446447837:parameter/dev/airtable-app"
+              - Effect: Allow
+                Action:
+                  - ssm:GetParameter
+                Resource:
+                  - "arn:aws:ssm:us-east-1:986446447837:parameter/dev/airtable-app"
 
   GeneratorLambdaFunction:
     Type: "AWS::Lambda::Function"
     Properties:
-      Description: !Sub "Static site generator for ${BlogName}"
+      Description: !Sub "AirTable Synchronization code for ${BlogName}"
       #TBD: Some static site generators might need more permissions
       Role: !GetAtt LambdaExecutionRole.Arn
       MemorySize: 1536
       Timeout: 300
       Runtime: !Ref GeneratorLambdaFunctionRuntime
       Handler: !Ref GeneratorLambdaFunctionHandler
+      Environment:
+        Variables:
+          S3_BUCKET: !Sub "airblog.${BlogName}"
       Code:
         S3Bucket: !Ref GeneratorLambdaFunctionS3Bucket
         S3Key: !Ref GeneratorLambdaFunctionS3Key
+
+  # We need one of these for each table query we want to regularly perform
+  # It will not work on the blog table
+  ScheduleSyncGenerator:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: "Run the syncrhonization code every five minutes"
+      Name: "airtable-sync"
+      ScheduleExpression: "rate(5 minutes)"
+      State: "ENABLED"
+      Targets:
+        - 
+          Arn:
+            Fn::GetAtt:
+              - "GeneratorLambdaFunction"
+              - "Arn"
+          Id: "TargetLambdaFunction"
+
+  PermissionForEventsToInvokeSyncLambda:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Ref: "GeneratorLambdaFunction"
+      Action: "lambda:InvokeFunction"
+      Principal: "events.amazonaws.com"
+      SourceArn: 
+        Fn::GetAtt: 
+          - "ScheduleSyncGenerator" 
+          - "Arn"
 
 Outputs:
   DomainName:

@@ -1,0 +1,11 @@
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\bin\Debug\netcoreapp2.1\Function.deps.json
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\bin\Debug\netcoreapp2.1\Function.runtimeconfig.json
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\bin\Debug\netcoreapp2.1\Function.runtimeconfig.dev.json
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\bin\Debug\netcoreapp2.1\Function.dll
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\bin\Debug\netcoreapp2.1\Function.pdb
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\obj\Debug\netcoreapp2.1\Function.csprojAssemblyReference.cache
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\obj\Debug\netcoreapp2.1\Function.csproj.CoreCompileInputs.cache
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\obj\Debug\netcoreapp2.1\Function.AssemblyInfoInputs.cache
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\obj\Debug\netcoreapp2.1\Function.AssemblyInfo.cs
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\obj\Debug\netcoreapp2.1\Function.dll
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\obj\Debug\netcoreapp2.1\Function.pdb
