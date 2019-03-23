@@ -15,8 +15,8 @@ open System
 ()
 
 
-type Function(s3Client: IAmazonS3) =
-    new() = Function(new AmazonS3Client())
+type FSFunction(s3Client: IAmazonS3) =
+    new() = FSFunction(new AmazonS3Client())
 
     /// <summary>
     /// This method is called for every Lambda invocation. This method takes in an S3 event object and can be used

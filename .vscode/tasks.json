@@ -9,7 +9,7 @@
       "command": "echo Hello"
     },
     {
-      "label": "Build Lambda",
+      "label": "Build Local",
       "command": "sh build.sh",
       "type": "shell",
       "options": {
@@ -22,7 +22,7 @@
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "Test Locally",
+      "label": "Test Local",
       "command": "sh echo cow",
       "type": "shell",
       "options": {
@@ -48,7 +48,33 @@
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "Deploy Cloud",
+      "label": "Deploy Blue Cloud",
+      "command": "sh deploy.sh",
+      "type": "shell",
+      "options": {
+        "cwd": "./"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Test Blue Cloud",
+      "command": "sh deploy.sh",
+      "type": "shell",
+      "options": {
+        "cwd": "./"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Swap Blue and Green",
       "command": "sh deploy.sh",
       "type": "shell",
       "options": {

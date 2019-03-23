@@ -1,5 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <IsPackable>false</IsPackable>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
@@ -8,11 +10,13 @@
     <PackageReference Include="Amazon.Lambda.S3Events" Version="1.1.0" />
     <PackageReference Include="AWSSDK.S3" Version="3.3.31.19" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
-    <PackageReference Include="NUnit3TEstAdapter" Version="3.13.0" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\csharp\Function.csproj" />
+    <ProjectReference Include="..\..\src\fsharp\FSFunction.fsproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FSFunctionTest.fs" />
   </ItemGroup>
 </Project>

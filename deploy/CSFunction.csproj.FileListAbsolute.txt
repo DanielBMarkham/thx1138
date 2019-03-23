@@ -1,0 +1,11 @@
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\bin\Debug\netcoreapp2.1\CSFunction.deps.json
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\bin\Debug\netcoreapp2.1\CSFunction.runtimeconfig.json
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\bin\Debug\netcoreapp2.1\CSFunction.runtimeconfig.dev.json
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\bin\Debug\netcoreapp2.1\CSFunction.dll
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\bin\Debug\netcoreapp2.1\CSFunction.pdb
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\obj\Debug\netcoreapp2.1\CSFunction.csprojAssemblyReference.cache
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\obj\Debug\netcoreapp2.1\CSFunction.csproj.CoreCompileInputs.cache
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\obj\Debug\netcoreapp2.1\CSFunction.AssemblyInfoInputs.cache
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\obj\Debug\netcoreapp2.1\CSFunction.AssemblyInfo.cs
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\obj\Debug\netcoreapp2.1\CSFunction.dll
+D:\Dropbox\aa-source\thx1138\thx1138\src\csharp\obj\Debug\netcoreapp2.1\CSFunction.pdb

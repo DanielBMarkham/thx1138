@@ -18,7 +18,7 @@ using AWSLambda2;
 
 namespace AWSLambda2.Tests
 {
-    public class FunctionTest
+    public class CSFunctionTest
     {
         [Fact(DisplayName="DisplayName should be displayed")]
         public async Task TestS3EventLambdaFunction()
@@ -56,7 +56,7 @@ namespace AWSLambda2.Tests
                 };
 
                 // Invoke the lambda function and confirm the content type was returned.
-                var function = new Function(s3Client);
+                var function = new CSFunction(s3Client);
                 var contentType = await function.FunctionHandler(s3Event, null);
 
                 Assert.Equal("text/plain", contentType);

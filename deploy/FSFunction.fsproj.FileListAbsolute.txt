@@ -1,0 +1,10 @@
+D:\Dropbox\aa-source\thx1138\thx1138\src\fsharp\bin\Debug\netcoreapp2.1\FSFunction.deps.json
+D:\Dropbox\aa-source\thx1138\thx1138\src\fsharp\bin\Debug\netcoreapp2.1\FSFunction.runtimeconfig.json
+D:\Dropbox\aa-source\thx1138\thx1138\src\fsharp\bin\Debug\netcoreapp2.1\FSFunction.runtimeconfig.dev.json
+D:\Dropbox\aa-source\thx1138\thx1138\src\fsharp\bin\Debug\netcoreapp2.1\FSFunction.dll
+D:\Dropbox\aa-source\thx1138\thx1138\src\fsharp\bin\Debug\netcoreapp2.1\FSFunction.pdb
+D:\Dropbox\aa-source\thx1138\thx1138\src\fsharp\obj\Debug\netcoreapp2.1\FSFunction.fsprojAssemblyReference.cache
+D:\Dropbox\aa-source\thx1138\thx1138\src\fsharp\obj\Debug\netcoreapp2.1\FSFunction.AssemblyInfoInputs.cache
+D:\Dropbox\aa-source\thx1138\thx1138\src\fsharp\obj\Debug\netcoreapp2.1\FSFunction.AssemblyInfo.fs
+D:\Dropbox\aa-source\thx1138\thx1138\src\fsharp\obj\Debug\netcoreapp2.1\FSFunction.dll
+D:\Dropbox\aa-source\thx1138\thx1138\src\fsharp\obj\Debug\netcoreapp2.1\FSFunction.pdb

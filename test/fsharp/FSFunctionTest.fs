@@ -16,7 +16,7 @@ open Amazon.S3.Util
 open AWSLambda1
 
 
-module FunctionTest =
+module FSFunctionTest =
     [<Fact>]
     let ``Test getting content type for an event``() = async {
         use s3Client = new AmazonS3Client(RegionEndpoint.USWest2)
@@ -48,7 +48,7 @@ module FunctionTest =
 
             let s3Event = S3Event(Records = List(eventRecords))
             let lambdaContext = TestLambdaContext()
-            let lambdaFunction = Function(s3Client)
+            let lambdaFunction = FSFunction(s3Client)
             //let contentType = lambdaFunction.lambda_handler s3Event lambdaContext
             let contentType = lambdaFunction.lambda_handler "" lambdaContext
             //Assert.Equal("text/plain", contentType)
