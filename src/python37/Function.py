@@ -77,31 +77,31 @@ def lambda_handler(event, context):
     write_json(load_data())
 
     global FILENAME
-    FILENAME = 'Tags'
+    FILENAME = 'Tags.json'
     global API_URL
     API_URL = 'https://api.airtable.com/v0/%s/%s' % (
         AIRTABLE_APP,'Tags')
     write_json(load_data())
 
 
-    FILENAME = 'Categories'
+    FILENAME = 'Categories.json'
     API_URL = 'https://api.airtable.com/v0/%s/%s' % (
         AIRTABLE_APP, 'Categories')
     write_json(load_data())
 
 
-    FILENAME = 'Media'
+    FILENAME = 'Media.json'
     API_URL = 'https://api.airtable.com/v0/%s/%s' % (
         AIRTABLE_APP, 'Media')
     write_json(load_data())
 
 
-    FILENAME = 'Authors'
+    FILENAME = 'Authors.json'
     API_URL = 'https://api.airtable.com/v0/%s/%s' % (
         AIRTABLE_APP, 'Authors')
     write_json(load_data())
 
-    FILENAME = 'Questions'
+    FILENAME = 'Questions.json'
     API_URL = 'https://api.airtable.com/v0/%s/%s' % (
       AIRTABLE_APP, 'Questions')
     write_json(load_data())

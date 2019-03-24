@@ -165,9 +165,9 @@ Resources:
   ScheduleSyncGenerator:
     Type: AWS::Events::Rule
     Properties:
-      Description: "Run the syncrhonization code every five minutes"
+      Description: "Run the syncrhonization code every two minutes"
       Name: "airtable-sync"
-      ScheduleExpression: "rate(5 minutes)"
+      ScheduleExpression: "rate(2 minutes)"
       State: "ENABLED"
       Targets:
         - 
